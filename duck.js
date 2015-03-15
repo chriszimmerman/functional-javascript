@@ -1,12 +1,7 @@
 function duckCount() {
-	return Array.prototype.reduce.call(arguments, function(ducks, obj){
-		if(Object.getPrototypeOf(obj) === Object.prototype && Object.prototype.hasOwnProperty.call(obj, 'quack')){
-			return ducks + 1;
-		}
-		else{
-			return ducks;
-		}
-	}, 0);
+	return Array.prototype.filter.call(arguments, function(obj){
+		return Object.prototype.hasOwnProperty.call(obj, 'quack');
+	}).length;
 }
 
 module.exports = duckCount
