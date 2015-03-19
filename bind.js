@@ -1,6 +1,3 @@
 module.exports = function(namespace) {
-	var foo = function(){
-		console.log.bind(undefined, namespace);
-	};
-	return foo;
+	return console.log.bind(undefined, namespace);
 }
