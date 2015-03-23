@@ -1,20 +1,19 @@
 function repeat(operation, num) {
-	function repeat_r(operation, num) {
+	return function(){
 		if (num <= 0) return;
 		operation();
-		return repeat_r.bind(null, operation, num - 1); 
-	}
-	return trampoline(repeat_r.bind(null, operation, num));
+		return repeat(operation, num - 1); 
+	};
 }
 
 function trampoline(fn) {
 	while(fn && fn instanceof Function){
-		fn = fn.apply(fn.context, fn.args);
+		fn = fn();
 	}
-	return fn;
 }
 
 module.exports = function(operation, num) {
-	// You probably want to call your trampoline here!
-	return repeat(operation, num);
+	trampoline(function(){
+		return repeat(operation, num);
+	});
 }
